@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/madhav-ai-learning/argocd-helm-example.git' # Replace with your repo URL
+    path: helm-chart
+    targetRevision: HEAD
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: my-app
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
